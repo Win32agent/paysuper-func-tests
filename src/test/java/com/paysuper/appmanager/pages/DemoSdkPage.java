@@ -62,6 +62,8 @@ public class DemoSdkPage extends AbstractPage {
         clearSimpleCurrencyField();
         enterSimpleCurrencyField(currency);
         clickOnBuyButton();
+
+
         return new PayFormPage(driver);
     }
 

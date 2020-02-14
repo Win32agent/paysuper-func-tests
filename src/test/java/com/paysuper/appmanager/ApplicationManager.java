@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class ApplicationManager {
+
     public WebDriver driver;
     private Local l;
     public GetProperties getProperties;
@@ -34,7 +35,7 @@ public class ApplicationManager {
         JSONObject envs = (JSONObject) config.get("environments");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
+        capabilities.setCapability("resolution", "1920x1080");
         Map<String, String> envCapabilities = (Map<String, String>) envs.get(environment);
         Iterator it = envCapabilities.entrySet().iterator();
         while (it.hasNext()) {
@@ -68,9 +69,12 @@ public class ApplicationManager {
             options.put("key", accessKey);
             l.start(options);
         }
+
         driver = new RemoteWebDriver(
                 new URL("http://" + username + ":" + accessKey + "@" + config.get("server") + "/wd/hub"), capabilities);
         getProperties = new GetProperties(zone);
         restAPI = new RestAPI();
+
+
     }
 }
